@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { ListTasksComponent } from './list-tasks/list-tasks.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ListTasksComponent } from './list-tasks/list-tasks.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ButtonComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

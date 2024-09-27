@@ -1,0 +1,29 @@
+@use '../../../colors.scss' as *;
+
+:host {
+    button {
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        
+        &.primary {
+            background-color: $primary;
+        }
+
+        &.secondary {
+            background-color: $secondary;
+        }
+
+        &.notification {
+            background-color: $notification;
+        }
+
+        &.error {
+            background-color: $error;
+        }
+
+    }
+}
