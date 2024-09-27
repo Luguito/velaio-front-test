@@ -1,0 +1,42 @@
+<section>
+    <header>
+        <h1>Crear nueva tarea</h1>
+    </header>
+    <main>
+        <form action="">
+            <div>
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="limitDate">Fecha de limite:</label>
+                <input type="date" id="limitDate" name="limitDate" required>
+            </div>
+            <div>
+                <label for="people">Personas Asociadas:</label>
+                <section>
+                    <div>
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+
+                        <label for="age">Edad:</label>
+                        <input type="number" id="age" name="age" required>
+                    </div>
+                    <div>
+                        <label for="skills">Habilidades:</label>
+                        <section>
+                            <input type="text" name="skill">
+                            <button>Agregar habilidad</button>
+                            <button>Eliminar habilidad</button>
+                        </section>
+                    </div>
+                </section>
+                <button>Agregar persona</button>
+                <button>Eliminar persona</button>
+            </div>
+            <button type="submit">Guardar tarea</button>
+        </form>
+    </main>
+</section>

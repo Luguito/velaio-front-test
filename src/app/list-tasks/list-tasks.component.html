@@ -1,0 +1,31 @@
+<section>
+    <header>
+        <h1>Lista de Taareas</h1>
+    </header>
+    <nav>
+        <label for="filter">Filtrar por estado:</label>
+        <section>
+            <button>Todos</button>
+            <button>Pendientes</button>
+            <button>Completadas</button>
+        </section>
+    </nav>
+    <main>
+        <section class="task" *ngFor="let task of tasks">
+            <h2>{{ task.name }}</h2>
+            <h3>{{task.limitDate | date: 'dd/MM/yyyy'}}</h3>
+            <p>Estado: {{ task.status }}</p>
+            <ul>
+                <li *ngFor="let person of task.assignedTo">
+                    <h3>{{ person.name }}</h3>
+                    <p>Edad: {{ person.age }}</p>
+                    <ul>
+                        <li *ngFor="let skill of person.skills">{{ skill }}</li>
+                    </ul>
+                </li>
+            </ul>
+            <button>Marcar como completada</button>
+        </section>
+        <button routerLink="/new-task">Crear nueva tarea</button>
+    </main>
+</section>
