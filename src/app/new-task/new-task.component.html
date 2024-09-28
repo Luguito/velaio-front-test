@@ -3,40 +3,66 @@
         <h1>Crear nueva tarea</h1>
     </header>
     <main>
-        <form action="">
-            <div>
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div>
-                <label for="limitDate">Fecha de limite:</label>
-                <input type="date" id="limitDate" name="limitDate" required>
-            </div>
-            <div>
-                <label for="people">Personas Asociadas:</label>
-                <section>
-                    <div>
-                        <label for="name">Nombre:</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div>
-
-                        <label for="age">Edad:</label>
-                        <input type="number" id="age" name="age" required>
-                    </div>
-                    <div>
-                        <label for="skills">Habilidades:</label>
-                        <section>
-                            <input type="text" name="skill">
-                            <button>Agregar habilidad</button>
-                            <button>Eliminar habilidad</button>
-                        </section>
-                    </div>
+        <form class="form-people" (submit)="onSubmit($event)">
+            <app-input-field type="text" id="task-name">
+                Nombre de la tarea:
+            </app-input-field>
+            <app-input-field type="date" id="limit-date">
+                Fecha de limite:
+            </app-input-field>
+            <section class="creation-people">
+                <h3>Personas Asociadas:</h3>
+                <section class="people-assigned">
+                    <ng-container *ngFor="let person of [{}, {}]">
+                        <div class="people-item flex justify-between align-center">
+                            <p>Juan (23)</p>
+                            <button class="close-icon" type="button">
+                                <span class="material-symbols-outlined">
+                                    close
+                                </span>
+                            </button>
+                        </div>
+                    </ng-container>
                 </section>
-                <button>Agregar persona</button>
-                <button>Eliminar persona</button>
-            </div>
-            <button type="submit">Guardar tarea</button>
+                <section class="creation-people-form">
+                    <div>
+                        <app-input-field type="text" id="person-name">
+                            Nombre completo:
+                        </app-input-field>
+                        <app-input-field type="number" id="age">
+                            Edad:
+                        </app-input-field>
+                    </div>
+                    <section>
+                        <app-input-field type="text" id="skills">
+                            Habilidades:
+                            <button icon type="button" class="check-icon">
+                                <span class="material-symbols-outlined">
+                                    check
+                                </span>
+                            </button>
+                        </app-input-field>
+                        <section class="skills-list">
+                            <ng-container *ngFor="let skill of ['asdasd','asdasd','asdasd']">
+                                <div class="flex justify-between align-center">
+                                    {{ skill }}
+                                    <button class="close-icon" type="button">
+                                        <span class="material-symbols-outlined">
+                                            close
+                                        </span>
+                                    </button>
+                                </div>
+                            </ng-container>
+                        </section>
+                    </section>
+                </section>
+                <section class="add-new-people">
+                    Agregar persona
+                </section>
+            </section>
+            <footer class="create-task-footer">
+                <app-button mode="secondary" type="submit">Guardar tarea</app-button>
+            </footer>
         </form>
     </main>
 </section>

@@ -1,0 +1,21 @@
+:host {
+    .field {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        gap: 1em;
+        align-items: center;
+
+        @media only screen and (min-width: 600px) {
+            grid-template-columns: 1fr 1fr auto;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #a69d9d42;
+            border-radius: 7px;
+            padding: 6px;
+            outline: none;
+        }
+    }
+}

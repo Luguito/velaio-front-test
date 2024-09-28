@@ -1,0 +1,94 @@
+@use '../../colors.scss' as *;
+
+:host {
+    .form-people {
+
+        .creation-people {
+            margin-top: 2em;
+
+            .add-new-people {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 2px dashed grey;
+                padding: 2em;
+                border-radius: 10px;
+                opacity: 0.8;
+                cursor: pointer;
+                margin: 2em 1em;
+
+                &:hover {
+                    background-color: $primary;
+                    border: 2px solid $background;
+                    color: white
+                }
+
+                &:active {
+                    background-color: green;
+                    color: white
+                }
+            }
+
+            .people-assigned {
+                padding: 1em 1em;
+
+                .people-item {
+                    border-bottom: 2px dashed rgba(205, 200, 200, 0.346);
+                    margin-bottom: 1em;
+                }
+
+
+            }
+
+            &>section.creation-people-form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0 10px 1em;
+
+                button.check-icon {
+                    border-radius: 50%;
+                    background-color: $primary;
+                    color: white;
+                    font-size: 15px;
+                    border: none;
+                    display: flex;
+                    padding: 2px;
+                    cursor: pointer;
+                }
+            }
+
+            .skills-list {
+                margin-top: 1em;
+            }
+
+            &>footer {
+                display: flex;
+                gap: 1em;
+                margin-bottom: 2em;
+                justify-content: center;
+            }
+
+            button.close-icon {
+                border-radius: 50%;
+                background-color: $error;
+                color: white;
+                font-size: 15px;
+                border: none;
+                display: flex;
+                padding: 2px;
+                cursor: pointer;
+            }
+        }
+
+        &>footer {
+            display: flex;
+            justify-content: center;
+
+            ::ng-deep app-button button {
+                padding: 1em 3em;
+            }
+        }
+
+    }
+}

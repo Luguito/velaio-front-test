@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { ListTasksComponent } from './list-tasks/list-tasks.component';
 import { ButtonComponent } from './components/button/button.component';
+import { InputFieldComponent } from './components/input-field/input-field.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ButtonComponent } from './components/button/button.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonComponent
+    ButtonComponent,
+    InputFieldComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class NewTaskComponent {
 
+  onSubmit(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('form submitted');
+  }
 }

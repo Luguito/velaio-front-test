@@ -9,5 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
-  @Input() type: 'primary' | 'secondary' | 'notification' | 'error' = 'primary';
+  @Input() mode: 'primary' | 'secondary' | 'notification' | 'error' = 'primary';
+  @Input() type: 'button' | 'submit' | 'reset' = 'button';
 }

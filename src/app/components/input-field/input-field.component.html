@@ -1,0 +1,7 @@
+<div class="field">
+    <label [for]="id">
+        <ng-content></ng-content>
+    </label>
+    <input type="{{type}}" [id]="id" [name]="id">
+    <ng-content select="[icon]"></ng-content>
+</div>
