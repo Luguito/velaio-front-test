@@ -2,6 +2,6 @@
     <label [for]="id">
         <ng-content></ng-content>
     </label>
-    <input type="{{type}}" [id]="id" [name]="id">
+    <input type="{{type}}" [id]="id" [name]="id" (input)="onInputChange($event)" >
     <ng-content select="[icon]"></ng-content>
 </div>
