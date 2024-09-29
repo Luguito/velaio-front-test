@@ -14,9 +14,9 @@
                 <h3>Personas Asociadas:</h3>
                 <section class="people-assigned">
                     <ng-container *ngFor="let person of assignedTo.controls; let i = index">
-                        <div class="people-item flex justify-between align-center" (click)="removePerson(i)">
+                        <div class="people-item flex justify-between align-center">
                             <p>{{ person.get('name')?.value }} ({{ person.get('age')?.value }})</p>
-                            <button class="close-icon" type="button">
+                            <button class="close-icon" type="button" (click)="removePerson(i)">
                                 <span class="material-symbols-outlined">
                                     close
                                 </span>
