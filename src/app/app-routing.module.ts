@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListTasksComponent } from './list-tasks/list-tasks.component';
-import { NewTaskComponent } from './new-task/new-task.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list-tasks', pathMatch: 'full' },
-  { path: 'new-task', component: NewTaskComponent },
   { path: 'list-tasks', component: ListTasksComponent },
+  { path: 'new-task', loadComponent: () => import('./new-task/new-task.component').then(m => m.NewTaskComponent) },
 ];
 
 @NgModule({

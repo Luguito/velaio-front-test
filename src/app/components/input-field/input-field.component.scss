@@ -1,3 +1,5 @@
+@use '../../../colors.scss' as *;
+
 :host {
     .field {
         display: grid;
@@ -16,6 +18,15 @@
             border-radius: 7px;
             padding: 6px;
             outline: none;
+
+        }
+        &.error {
+            input {
+                border: 1px solid $error;
+            }
+            small {
+                color: $error;
+            }
         }
     }
 }

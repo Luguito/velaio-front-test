@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { filter, Observable } from 'rxjs';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-list-tasks',
@@ -6,27 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-tasks.component.scss']
 })
 export class ListTasksComponent {
-  tasks = [
-    {
-      name: 'Tarea 1', status: false, limitDate: new Date(), assignedTo: [
-        { name: 'Juan', age: 25, skills: ['Typescript', 'Angular'] },
-        { name: 'Pedro', age: 30, skills: ['Typescript', 'Angular'] },
-        { name: 'Carlos', age: 35, skills: ['Typescript', 'Angular', 'Angular', 'Angular', 'Angular', 'Angular'] }
-      ]
-    },
-    {
-      name: 'Tarea 2', status: false, limitDate: new Date(), assignedTo: [
-        { name: 'Juan', age: 25, skills: ['Typescript', 'Angular'] },
-        { name: 'Pedro', age: 30, skills: ['Typescript', 'Angular'] },
-        { name: 'Carlos', age: 35, skills: ['Typescript', 'Angular'] }
-      ]
-    },
-    {
-      name: 'Tarea 3', status: true, limitDate: new Date(), assignedTo: [
-        { name: 'Juan', age: 25, skills: [] },
-        { name: 'Pedro', age: 30, skills: [] },
-        { name: 'Carlos', age: 35, skills: [] }
-      ]
-    }
-  ]
+  _taskService = inject(TaskService);
+  public listTasks: Observable<any> = this._taskService.getTasks();
+
+
+  filter(status: any) {
+    this._taskService.filterTasks(status);
+  }
+
+  markAsCompleted(index: number): void {
+    this._taskService.completeTask(index);
+  }
 }

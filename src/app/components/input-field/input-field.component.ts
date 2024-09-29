@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, forwardRef, inject, Injector, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, NgControl } from '@angular/forms';
 @Component({
   selector: 'app-input-field',
   standalone: true,
@@ -10,20 +10,26 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: InputFieldComponent,
+      useExisting: forwardRef(() => InputFieldComponent),
       multi: true
     }
   ]
 })
-export class InputFieldComponent implements ControlValueAccessor {
+export class InputFieldComponent implements ControlValueAccessor, OnInit {
   @Input() type: 'text' | 'number' | 'date' = 'text';
   @Input() id: string = "";
   value: string | number | Date = "";
   onChange!: (value: string | number | Date) => void;
   onTouched!: () => void;
+  ngControl!: NgControl;
+  constructor(private injector: Injector) { }
+
+  ngOnInit() {
+    this.ngControl = this.injector.get(NgControl);
+  }
 
   writeValue(value: string | number | Date) {
-    this.value = value;
+    this.value = value ? value : '';
   }
 
   registerOnChange(fn: (value: string | number | Date) => void) {
@@ -43,6 +49,7 @@ export class InputFieldComponent implements ControlValueAccessor {
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.value = input.value;
+
     this.onChange(this.value);
     this.onTouched();
   }

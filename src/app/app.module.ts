@@ -3,16 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NewTaskComponent } from './new-task/new-task.component';
 import { ListTasksComponent } from './list-tasks/list-tasks.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
+import { ArrayJoinPipe } from './pipes/separator.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewTaskComponent,
-    ListTasksComponent
+    ListTasksComponent,
+    ArrayJoinPipe
   ],
   imports: [
     BrowserModule,

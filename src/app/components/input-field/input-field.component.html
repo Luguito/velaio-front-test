@@ -1,7 +1,23 @@
-<div class="field">
+<div class="field" [ngClass]="{'error': ngControl.invalid && ngControl.touched}">
     <label [for]="id">
         <ng-content></ng-content>
     </label>
-    <input type="{{type}}" [id]="id" [name]="id" (input)="onInputChange($event)" >
+    <div class="flex flex-column">
+        <input type="{{type}}" [id]="id" [name]="id" (input)="onInputChange($event)" [value]="value">
+        <ng-container *ngIf="ngControl?.invalid && ngControl?.touched">
+            <ng-container *ngIf="ngControl?.errors?.['required']">
+                <small>Campo requerido</small>
+            </ng-container>
+            <ng-container *ngIf="ngControl && ngControl?.errors?.['minlength']">
+                <small>El nombre debe tener al menos 5 caracteres</small>
+            </ng-container>
+            <ng-container *ngIf="ngControl && ngControl?.errors?.['nameAlreadyExists']">
+                <small>El nombre ya existe</small>
+            </ng-container>
+            <ng-container *ngIf="ngControl && ngControl?.errors?.['min']">
+                <small>Debes ser mayor de 18</small>
+            </ng-container>
+        </ng-container>
+    </div>
     <ng-content select="[icon]"></ng-content>
 </div>

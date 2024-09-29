@@ -5,45 +5,49 @@
     <nav class="filter-nav flex-wrap flex">
         <label for="filter">Filtrar por estado:</label>
         <section class="filter-actions flex">
-            <app-button mode="secondary">Todos</app-button>
-            <app-button mode="notification">Pendientes</app-button>
-            <app-button>Completadas</app-button>
+            <app-button mode="secondary" (click)="filter('')">Todos</app-button>
+            <app-button mode="notification" (click)="filter(false)">Pendientes</app-button>
+            <app-button (click)="filter(true)">Completadas</app-button>
         </section>
     </nav>
     <main>
         <section class="flex flex-wrap">
-            <section *ngFor="let task of tasks; index as indexTask" class="task flex" [ngClass]="{
-                    'pending': !task.status, 
-                    'completed': task.status
-                }">
-                <aside class="flex justify-center">
-                    {{indexTask + 1}}.
-                </aside>
-                <section class="task-content">
-                    <header class="flex align-center justify-between">
-                        <h2>{{ task.name }}</h2>
-                        <p>-</p>
-                        <h3>{{task.limitDate | date: 'dd/MM/yyyy'}}</h3>
-                    </header>
-                    <section class="content">
-                        <h2>Personas Asociadas:</h2>
-                        <section class="people-assigned" *ngFor="let person of task.assignedTo">
-                            <h3 class="no-margin">{{ person.name }} ({{person.age}})</h3>
-                            <div class="flex align-center flex-wrap">
-                                <h3>Habilidades:</h3>
-                                <!-- hacer un pipe para separar -->
-                                <p class="no-margin" *ngFor="let skill of person.skills">{{ skill }}</p>
-                            </div>
+            <ng-container *ngIf="(listTasks | async) as list">
+                <h1 *ngIf="list.length == 0" class="no-tasks">
+                    No hay tareas creadas
+                </h1>
+                <section *ngFor="let task of list; index as indexTask" class="task flex" 
+                    [ngClass]="{
+                        'pending': !task.status, 
+                        'completed': task.status
+                    }">
+                    <aside class="flex justify-center">
+                        {{indexTask + 1}}.
+                    </aside>
+                    <section class="task-content">
+                        <header class="flex align-center justify-between">
+                            <h2>{{ task.name }}</h2>
+                            <p>-</p>
+                            <h3>{{task.limitDate | date: 'dd/MM/yyyy'}}</h3>
+                        </header>
+                        <section class="content">
+                            <h2>Personas Asociadas:</h2>
+                            <section class="people-assigned" *ngFor="let person of task.assignedTo">
+                                <h3 class="no-margin">{{ person.name }} ({{person.age}})</h3>
+                                <div class="flex align-center flex-wrap">
+                                    <h3>Habilidades:</h3>
+                                    <p class="no-margin">{{ person.skills | joinPipe: ','}}</p>
+                                </div>
+                            </section>
                         </section>
+                        <footer>
+                            <ng-container *ngIf="!task.status">
+                                    <app-button (click)="markAsCompleted(indexTask)">Completar</app-button>
+                            </ng-container>
+                        </footer>
                     </section>
-                    <!-- siempre misma altura con el resto -->
-                    <footer>
-                        <ng-container *ngIf="!task.status">
-                                <app-button>Completar</app-button>
-                        </ng-container>
-                    </footer>
                 </section>
-            </section>
+            </ng-container>
         </section>
     </main>
     <footer class="flex justify-center">

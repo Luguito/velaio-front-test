@@ -3,19 +3,19 @@
         <h1>Crear nueva tarea</h1>
     </header>
     <main>
-        <form class="form-people" (submit)="onSubmit($event)">
-            <app-input-field type="text" id="task-name">
+        <form class="form-people" (ngSubmit)="onSubmit($event)" [formGroup]="taskGroup">
+            <app-input-field type="text" id="task-name" formControlName="name">
                 Nombre de la tarea:
             </app-input-field>
-            <app-input-field type="date" id="limit-date">
+            <app-input-field type="date" id="limit-date" formControlName="limitDate">
                 Fecha de limite:
             </app-input-field>
             <section class="creation-people">
                 <h3>Personas Asociadas:</h3>
                 <section class="people-assigned">
-                    <ng-container *ngFor="let person of [{}, {}]">
-                        <div class="people-item flex justify-between align-center">
-                            <p>Juan (23)</p>
+                    <ng-container *ngFor="let person of assignedTo.controls; let i = index">
+                        <div class="people-item flex justify-between align-center" (click)="removePerson(i)">
+                            <p>{{ person.get('name')?.value }} ({{ person.get('age')?.value }})</p>
                             <button class="close-icon" type="button">
                                 <span class="material-symbols-outlined">
                                     close
@@ -24,29 +24,29 @@
                         </div>
                     </ng-container>
                 </section>
-                <section class="creation-people-form">
+                <section class="creation-people-form" [formGroup]="personGroup">
                     <div>
-                        <app-input-field type="text" id="person-name">
+                        <app-input-field type="text" id="person-name" formControlName="name">
                             Nombre completo:
                         </app-input-field>
-                        <app-input-field type="number" id="age">
+                        <app-input-field type="number" id="age" formControlName="age">
                             Edad:
                         </app-input-field>
                     </div>
                     <section>
-                        <app-input-field type="text" id="skills">
+                        <app-input-field type="text" id="skills" formControlName="skill">
                             Habilidades:
-                            <button icon type="button" class="check-icon">
+                            <button icon type="button" class="check-icon" (click)="addSkill()">
                                 <span class="material-symbols-outlined">
                                     check
                                 </span>
                             </button>
                         </app-input-field>
                         <section class="skills-list">
-                            <ng-container *ngFor="let skill of ['asdasd','asdasd','asdasd']">
+                            <ng-container *ngFor="let skill of skills.controls; let i = index">
                                 <div class="flex justify-between align-center">
-                                    {{ skill }}
-                                    <button class="close-icon" type="button">
+                                    {{ skill?.value }}
+                                    <button class="close-icon" type="button" (click)="removeSkill(i)">
                                         <span class="material-symbols-outlined">
                                             close
                                         </span>
@@ -54,9 +54,12 @@
                                 </div>
                             </ng-container>
                         </section>
+                        <ng-container *ngIf="!skills.length && skills.touched && skills.getError('error')">
+                            <span>Debes tener al menos una habilidad</span>
+                        </ng-container>
                     </section>
                 </section>
-                <section class="add-new-people">
+                <section class="add-new-people" (click)="addPerson()">
                     Agregar persona
                 </section>
             </section>
