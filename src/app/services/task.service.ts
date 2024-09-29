@@ -28,7 +28,7 @@ export class TaskService {
         this.filteredTasks$.next([...data]);
     }
 
-    filterTasks(valueFilter: any): any {
+    filterTasks(valueFilter: boolean | string): any {
         if (valueFilter === '') {
             this.filteredTasks$.next(this.tasks$.value);
             return;

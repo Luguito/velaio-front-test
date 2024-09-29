@@ -12,7 +12,7 @@ export class ListTasksComponent {
   public listTasks: Observable<any> = this._taskService.getTasks();
 
 
-  filter(status: any) {
+  filter(status: boolean | string) {
     this._taskService.filterTasks(status);
   }
 

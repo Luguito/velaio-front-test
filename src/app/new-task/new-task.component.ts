@@ -28,8 +28,6 @@ export class NewTaskComponent implements OnInit {
   }
 
   onSubmit(event: Event) {
-    console.log(this.taskGroup);
-
     if (this.taskGroup.invalid) {
       this.taskGroup.markAllAsTouched();
       this.personGroup.markAllAsTouched();
@@ -68,7 +66,7 @@ export class NewTaskComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(5), uniqueNameValidator(this.assignedTo)]],
       age: [0, [Validators.required, Validators.min(18)]],
       skill: [],
-      skills: this._fb.array([], [Validators.minLength(1), Validators.maxLength(4), minLengthArrayValidator]),
+      skills: this._fb.array([], [minLengthArrayValidator]),
     });
   }
 
@@ -102,7 +100,6 @@ export class NewTaskComponent implements OnInit {
       (person.get('skills') as FormArray).push(skill);
     }
 
-    console.log(person.value)
     this.assignedTo.push(person);
 
     this.personGroup.reset();
